@@ -17,6 +17,7 @@ class Lesson(models.Model):
 
     name = models.CharField(max_length=64)
     description = models.TextField(default='')
+    script = models.TextField(default='')
     course = models.ForeignKey(Course, models.CASCADE)
 
     def __str__(self):
