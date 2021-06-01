@@ -31,5 +31,5 @@ The API service of tutorin.tech.
 4. Run the application.
 
    ```bash
-   (tit-api-env) $ env SECRET_KEY=secret python3 manage.py runserver 0.0.0.0:8001
+   (tit-api-env) $ env SECRET_KEY=secret python3 manage.py runserver 0.0.0.0:8003
    ```
