@@ -21,3 +21,12 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('name', 'lessons', )
+
+
+class ContactUsSerializer(serializers.Serializer):  # pylint: disable=abstract-method
+    """Serializes data from Contact Us modal. """
+
+    name = serializers.CharField(required=False)
+    email = serializers.EmailField()
+    message = serializers.CharField()
+    agreement = serializers.BooleanField()

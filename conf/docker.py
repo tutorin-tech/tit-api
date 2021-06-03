@@ -26,6 +26,27 @@ DATABASES = {
 SECRET_KEY = os.environ['SECRET_KEY']  # do not run anything if SECRET_KEY is not set
 
 #
+# Email
+#
+
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'info@tutorin.tech')
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'true').lower() == 'true'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#
 # Rocket.Chat
 #
 
