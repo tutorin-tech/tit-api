@@ -24,3 +24,15 @@ DATABASES = {
 }
 
 SECRET_KEY = os.environ['SECRET_KEY']  # do not run anything if SECRET_KEY is not set
+
+#
+# Rocket.Chat
+#
+
+ROCKET_CHAT_DOMAIN = os.getenv('ROCKET_CHAT_DOMAIN', 'https://rc.cusdeb.com/')
+
+ROCKET_CHAT_USERNAME = os.getenv('ROCKET_CHAT_USERNAME')
+
+ROCKET_CHAT_PASSWORD = os.getenv('ROCKET_CHAT_PASSWORD')
+
+ROCKET_CHAT_ROOM = os.getenv('ROCKET_CHAT_ROOM', 'tit-contact-us')
