@@ -57,3 +57,5 @@ ROCKET_CHAT_USERNAME = os.getenv('ROCKET_CHAT_USERNAME')
 ROCKET_CHAT_PASSWORD = os.getenv('ROCKET_CHAT_PASSWORD')
 
 ROCKET_CHAT_ROOM = os.getenv('ROCKET_CHAT_ROOM', 'tit-contact-us')
+
+MEDIA_URL = os.environ.get('MEDIA_URL', '/media/')

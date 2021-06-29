@@ -7,6 +7,7 @@ class Course(models.Model):
     """A class model representing a course. """
 
     name = models.CharField(max_length=64)
+    preview_image = models.ImageField(upload_to='preview_images/', blank=True, null=True)
 
     def __str__(self):
         return f'{self.name}'
