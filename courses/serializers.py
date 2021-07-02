@@ -20,7 +20,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ('name', 'lessons', 'preview_image', )
+        fields = ('id', 'name', 'lessons', 'preview_image', )
 
 
 class ContactUsSerializer(serializers.Serializer):  # pylint: disable=abstract-method
