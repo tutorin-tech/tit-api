@@ -11,15 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 
-"""URL configuration for the users application. """
+"""A module that contains the admin interface of the users application. """
 
-from django.urls import re_path
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.contrib import admin
 
-from .views import SignUpView
+from .models import AccountConfirmationToken, Person
 
-urlpatterns = [
-    re_path('signup/?$', SignUpView.as_view(), name='sign-up'),
-    re_path('token/?$', TokenObtainPairView.as_view(), name='token-obtain-pair'),
-    re_path('token/refresh/?$', TokenRefreshView.as_view(), name='token-refresh'),
-]
+admin.site.register(AccountConfirmationToken)
+admin.site.register(Person)
