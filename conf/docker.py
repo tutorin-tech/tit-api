@@ -1,5 +1,6 @@
 """A module that extends and overrides settings.py via environment variables. """
 
+import datetime
 import os
 
 from dotenv import load_dotenv
@@ -24,6 +25,22 @@ DATABASES = {
 }
 
 SECRET_KEY = os.environ['SECRET_KEY']  # do not run anything if SECRET_KEY is not set
+
+#
+# SIMPLE JWT configuration
+#
+
+TOKEN_TTL = int(os.getenv('TOKEN_TTL', '5'))
+
+REFRESH_TOKEN_TTL = int(os.getenv('REFRESH_TOKEN_TTL', '40320'))  # 28 days
+
+SIMPLE_JWT['ALGORITHM'] = os.getenv('JWT_ALGORITHM', 'HS256')
+
+SIMPLE_JWT['SIGNING_KEY'] = SECRET_KEY
+
+SIMPLE_JWT['SLIDING_TOKEN_LIFETIME'] = datetime.timedelta(minutes=TOKEN_TTL)
+
+SIMPLE_JWT['SLIDING_TOKEN_REFRESH_LIFETIME'] = datetime.timedelta(minutes=REFRESH_TOKEN_TTL)
 
 #
 # Email
