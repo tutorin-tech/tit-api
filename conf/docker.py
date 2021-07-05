@@ -46,6 +46,10 @@ SIMPLE_JWT['SLIDING_TOKEN_REFRESH_LIFETIME'] = datetime.timedelta(minutes=REFRES
 # Email
 #
 
+BASE_SITE_URL = os.getenv('BASE_SITE_URL', 'http://tutorin.tech/')
+
+DEFAULT_SITE_NAME = os.getenv('DEFAULT_SITE_NAME', 'Tutor In Tech')
+
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'info@tutorin.tech')
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
