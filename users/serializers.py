@@ -14,9 +14,51 @@
 """A module that contains serializers for the users application. """
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
+from .models import AccountConfirmationToken
+
 User = get_user_model()
+
+
+class SetPasswordSerializer(serializers.Serializer):  # pylint: disable=abstract-method
+    """Serializes the set password view data. """
+
+    token = serializers.CharField(min_length=8, max_length=8)
+    password = serializers.CharField()
+    retype_password = serializers.CharField()
+
+    def validate_token(self, value):  # pylint: disable=no-self-use
+        """Validates the account confirmation token. """
+
+        if not AccountConfirmationToken.objects.filter(token=value).exists():
+            raise serializers.ValidationError('Токен не найден')
+
+        return value
+
+    def validate_password(self, value):  # pylint: disable=no-self-use
+        """Validates the new password. """
+
+        try:
+            validate_password(value)
+        except ValidationError as err:
+            raise serializers.ValidationError(err.messages)
+
+        return value
+
+    def validate_retype_password(self, value):
+        """Validates the password retype. """
+
+        if self.initial_data['password'] != value:
+            raise serializers.ValidationError('Пароли на совпадают')
+
+        return value
+
+    def update(self, instance, validated_data):  # pylint: disable=no-self-use
+        instance.set_password(validated_data['password'])
+        return instance
 
 
 class SignUpSerializer(serializers.Serializer):  # pylint: disable=abstract-method
