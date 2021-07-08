@@ -40,7 +40,7 @@ class SetPasswordView(mixins.UpdateModelMixin, generics.GenericAPIView):
             )
             self.kwargs['pk'] = person.user.id
 
-            self.update(request, *args, **kwargs)
+            return self.update(request, *args, **kwargs)
 
         return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
 
