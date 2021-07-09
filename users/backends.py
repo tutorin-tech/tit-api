@@ -17,7 +17,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 
 
-class CaseInsensitiveModelBackend(ModelBackend):
+class CheckAccountConfirmationModelBackendMixin(ModelBackend):
+    """Rejects users with 'account_confirmed' set to 'False'. """
+
+    def user_can_authenticate(self, user):
+        return user.person.account_confirmed and super().user_can_authenticate(user)
+
+
+class CaseInsensitiveModelBackend(CheckAccountConfirmationModelBackendMixin, ModelBackend):
     """Authentication backend class that allows case-insensitive login. """
 
     def authenticate(self, request, username=None, password=None, **kwargs):
@@ -44,7 +51,7 @@ class CaseInsensitiveModelBackend(ModelBackend):
             return None
 
 
-class EmailModelBackend(ModelBackend):
+class EmailModelBackend(CheckAccountConfirmationModelBackendMixin, ModelBackend):
     """Authentication backend class that allows login using email and password. """
 
     def authenticate(self, request, username=None, password=None, **kwargs):
