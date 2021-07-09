@@ -37,7 +37,7 @@ def create_person(sender,  # pylint: disable=unused-argument
         person = Person.objects.create(user=instance)
         ac_token = AccountConfirmationToken.objects.create(person=person)
 
-        confirm_account_base_url = urljoin(settings.BASE_SITE_URL, '/confirm-account/')
+        confirm_account_base_url = urljoin(settings.BASE_SITE_URL, '/set-password')
         context = {
             'confirm_account_url': f'{confirm_account_base_url}?token={ac_token.token}',
         }
