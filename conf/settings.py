@@ -82,6 +82,7 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'users.backends.CaseInsensitiveModelBackend',
+    'users.backends.EmailModelBackend',
 ]
 
 
