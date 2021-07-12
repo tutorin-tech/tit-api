@@ -18,7 +18,7 @@ from rest_framework import generics, mixins, permissions, status
 from rest_framework.response import Response
 
 from .models import Person
-from .serializers import SetPasswordSerializer, SignUpSerializer
+from .serializers import SetPasswordSerializer, SignUpSerializer, CurrentUserSerializer
 
 User = get_user_model()
 
@@ -64,3 +64,14 @@ class SignUpView(mixins.CreateModelMixin, generics.GenericAPIView):
         """POST-method for creating new user. """
 
         return self.create(request, *args, **kwargs)
+
+
+class WhoAmIView(generics.RetrieveAPIView):
+    """Returns the name of the authenticated user the request is sent on behalf of. """
+
+    queryset = User.objects.all()
+    serializer_class = CurrentUserSerializer
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def get_object(self):
+        return self.request.user
