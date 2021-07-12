@@ -16,11 +16,12 @@
 from django.urls import re_path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from .views import SetPasswordView, SignUpView
+from .views import SetPasswordView, SignUpView, WhoAmIView
 
 urlpatterns = [
     re_path('set-password/?$', SetPasswordView.as_view(), name='set-password'),
     re_path('signup/?$', SignUpView.as_view(), name='sign-up'),
     re_path('token/?$', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     re_path('token/refresh/?$', TokenRefreshView.as_view(), name='token-refresh'),
+    re_path('whoami/?$', WhoAmIView.as_view(), name='who-am-i')
 ]

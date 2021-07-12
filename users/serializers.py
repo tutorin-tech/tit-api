@@ -89,3 +89,11 @@ class SignUpSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
+
+class CurrentUserSerializer(serializers.ModelSerializer):
+    """Serializes the username of the authenticated user for the whoami endpoint. """
+
+    class Meta:
+        model = User
+        fields = ('username', )
