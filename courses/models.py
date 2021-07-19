@@ -20,6 +20,8 @@ class Lesson(models.Model):
     description = models.TextField(default='')
     script = models.TextField(default='')
     course = models.ForeignKey(Course, models.CASCADE)
+    next = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='prev',
+                             blank=True, null=True, unique=True)
 
     def __str__(self):
         return f'{self.name}'
