@@ -16,7 +16,13 @@ class LessonSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     """Serializes a course. """
 
-    lessons = LessonSerializer(source='lesson_set', many=True)
+    lessons = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_lessons(obj):
+        """Returns a sorted list of lessons for a current course. """
+
+        return LessonSerializer(obj.get_sorted_lessons(), many=True).data
 
     class Meta:
         model = Course

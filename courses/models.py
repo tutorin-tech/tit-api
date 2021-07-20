@@ -9,6 +9,20 @@ class Course(models.Model):
     name = models.CharField(max_length=64)
     preview_image = models.ImageField(upload_to='preview_images/', blank=True, null=True)
 
+    def get_sorted_lessons(self):
+        """Returns a sorted list of lessons for a current course. """
+
+        sorted_lessons = []
+
+        prev_lesson = self.lesson_set.get(prev=None)
+        sorted_lessons.append(prev_lesson)
+
+        for _ in range(self.lesson_set.count() - 1):
+            prev_lesson = self.lesson_set.get(prev=prev_lesson)
+            sorted_lessons.append(prev_lesson)
+
+        return sorted_lessons
+
     def __str__(self):
         return f'{self.name}'
 
