@@ -58,6 +58,7 @@ class SetPasswordSerializer(serializers.Serializer):  # pylint: disable=abstract
 
     def update(self, instance, validated_data):  # pylint: disable=no-self-use
         instance.set_password(validated_data['password'])
+        instance.save()
 
         instance.person.account_confirmed = True
         instance.person.save(update_fields=['account_confirmed'])
